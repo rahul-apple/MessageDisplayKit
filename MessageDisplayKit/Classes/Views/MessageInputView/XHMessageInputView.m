@@ -588,7 +588,8 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    self.multiMediaSendButton.enabled = ![string isEqualToString:@""];
+    NSString *trimmedString = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    self.multiMediaSendButton.enabled = ![trimmedString isEqualToString:@""];
     return YES;
 }
 
