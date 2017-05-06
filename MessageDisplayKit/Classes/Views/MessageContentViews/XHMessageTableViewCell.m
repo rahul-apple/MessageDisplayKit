@@ -8,6 +8,9 @@
 
 #import "XHMessageTableViewCell.h"
 
+#define CALIBRIFONT(_size) (UIFont *)[UIFont fontWithName:@"Calibri" size:(CGFloat)(_size)]
+
+
 static const CGFloat kXHLabelPadding = 5.0f;
 static const CGFloat kXHTimeStampLabelHeight = 20.0f;
 
@@ -219,6 +222,7 @@ static const CGFloat kXHUserNameLabelHeight = 20;
         XHMessageAvatarType avatarType = [[[XHConfigurationHelper appearance].messageTableStyle objectForKey:kXHMessageTableAvatarTypeKey] integerValue];
         self.avatarButton.messageAvatarType = avatarType;
         [self.avatarButton setImageWithURL:[NSURL URLWithString:photoURLString] placeholer:[self getAvatarPlaceholderImage]];
+        self.avatarButton.clipsToBounds = YES;
     }
 }
 
@@ -456,6 +460,8 @@ static const CGFloat kXHUserNameLabelHeight = 20;
         [avatarButton setImage:[self getAvatarPlaceholderImage] forState:UIControlStateNormal];
         [avatarButton addTarget:self action:@selector(avatarButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:avatarButton];
+        avatarButton.layer.cornerRadius = avatarButton.frame.size.height/2;
+        avatarButton.clipsToBounds = YES;
         self.avatarButton = avatarButton;
         
         if (message.shouldShowUserName) {
@@ -463,7 +469,7 @@ static const CGFloat kXHUserNameLabelHeight = 20;
             UILabel *userNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.avatarButton.bounds) + 20, kXHUserNameLabelHeight)];
             userNameLabel.textAlignment = NSTextAlignmentCenter;
             userNameLabel.backgroundColor = [UIColor clearColor];
-            userNameLabel.font = [UIFont systemFontOfSize:12];
+            userNameLabel.font = CALIBRIFONT(12);
             userNameLabel.textColor = [UIColor colorWithRed:0.140 green:0.635 blue:0.969 alpha:1.000];
             [self.contentView addSubview:userNameLabel];
             self.userNameLabel = userNameLabel;

@@ -308,7 +308,7 @@
             [_bubblePhotoImageView configureMessagePhoto:message.videoConverPhoto thumbnailUrl:message.thumbnailUrl originPhotoUrl:message.originPhotoUrl onBubbleMessageType:self.message.bubbleMessageType];
             break;
         case XHBubbleMessageMediaTypeVoice:
-            self.voiceDurationLabel.text = [NSString stringWithFormat:@"%@\'\'", message.voiceDuration];
+            self.voiceDurationLabel.text = @""; //[NSString stringWithFormat:@"%@\'\'", message.voiceDuration];
             break;
         case XHBubbleMessageMediaTypeEmotion:
             // 直接设置GIF

@@ -249,9 +249,9 @@
 - (UIButton *)createButtonWithImage:(UIImage *)image HLImage:(UIImage *)hlImage {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, [XHMessageInputView textViewLineHeight], [XHMessageInputView textViewLineHeight])];
     if (image)
-        [button setBackgroundImage:image forState:UIControlStateNormal];
+        [button setImage:image forState:UIControlStateNormal];
     if (hlImage)
-        [button setBackgroundImage:hlImage forState:UIControlStateHighlighted];
+        [button setImage:hlImage forState:UIControlStateHighlighted];
     
     return button;
 }
@@ -297,9 +297,9 @@
         }
         
         button = [self createButtonWithImage:[UIImage imageNamed:voiceNormalImageName] HLImage:[UIImage imageNamed:voiceHLImageName]];
-        [button addTarget:self action:@selector(messageStyleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        [button addTarget:self action:@selector(messageStyleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = 0;
-        [button setBackgroundImage:[UIImage imageNamed:keyboardNormalImageName] forState:UIControlStateSelected];
+//        [button setBackgroundImage:[UIImage imageNamed:keyboardNormalImageName] forState:UIControlStateSelected];
         buttonFrame = button.frame;
         buttonFrame.origin = CGPointMake(horizontalPadding, verticalPadding);
         button.frame = buttonFrame;
@@ -323,7 +323,7 @@
         
         button = [self createButtonWithImage:[UIImage imageNamed:extensionNormalImageName] HLImage:[UIImage imageNamed:extensionHLImageName]];
         button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-        [button addTarget:self action:@selector(messageStyleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        [button addTarget:self action:@selector(messageStyleButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = 2;
         buttonFrame = button.frame;
         buttonFrame.origin = CGPointMake(CGRectGetWidth(self.bounds) - horizontalPadding - CGRectGetWidth(buttonFrame), verticalPadding);
@@ -381,8 +381,6 @@
     XHMessageTextView *textView = [[XHMessageTextView  alloc] initWithFrame:CGRectZero];
     
     // 这个是仿微信的一个细节体验
-    textView.returnKeyType = UIReturnKeySend;
-    textView.enablesReturnKeyAutomatically = YES; // UITextView内部判断send按钮是否可以用
     
     UIColor *placeHolderTextColor = [[XHConfigurationHelper appearance].messageInputViewStyle objectForKey:kXHMessageInputViewPlaceHolderTextColorKey];
     if (placeHolderTextColor) {
@@ -466,11 +464,11 @@
         buttonFrame = CGRectMake(textViewLeftMargin-5, 0, width+10, self.frame.size.height);
         button.frame = buttonFrame;
         button.alpha = self.voiceChangeButton.selected;
-        [button addTarget:self action:@selector(holdDownButtonTouchDown) forControlEvents:UIControlEventTouchDown];
-        [button addTarget:self action:@selector(holdDownButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
-        [button addTarget:self action:@selector(holdDownButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
-        [button addTarget:self action:@selector(holdDownDragOutside) forControlEvents:UIControlEventTouchDragExit];
-        [button addTarget:self action:@selector(holdDownDragInside) forControlEvents:UIControlEventTouchDragEnter];
+//        [button addTarget:self action:@selector(holdDownButtonTouchDown) forControlEvents:UIControlEventTouchDown];
+//        [button addTarget:self action:@selector(holdDownButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
+//        [button addTarget:self action:@selector(holdDownButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+//        [button addTarget:self action:@selector(holdDownDragOutside) forControlEvents:UIControlEventTouchDragExit];
+//        [button addTarget:self action:@selector(holdDownDragInside) forControlEvents:UIControlEventTouchDragEnter];
         [self addSubview:button];
         self.holdDownButton = button;
     }
@@ -589,12 +587,8 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text isEqualToString:@"\n"]) {
-        if ([self.delegate respondsToSelector:@selector(didSendTextAction:)]) {
-            [self.delegate didSendTextAction:textView.text];
-        }
-        return NO;
-    }
+    NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    self.multiMediaSendButton.enabled = ![string isEqualToString:@""];
     return YES;
 }
 
