@@ -167,5 +167,11 @@ typedef NS_ENUM(NSInteger, XHMessageInputViewStyle) {
  */
 + (CGFloat)maxHeight;
 
+/**
+ *  输入框内的所有按钮，点击事件所触发的方法
+ *
+ *  @param sender 被点击的按钮对象
+ */
+- (void)messageStyleButtonClicked:(UIButton *)sender;
 
 @end

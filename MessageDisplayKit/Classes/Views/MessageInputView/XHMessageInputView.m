@@ -40,12 +40,7 @@
  */
 @property (nonatomic, copy) NSString *inputedText;
 
-/**
- *  输入框内的所有按钮，点击事件所触发的方法
- *
- *  @param sender 被点击的按钮对象
- */
-- (void)messageStyleButtonClicked:(UIButton *)sender;
+
 
 /**
  *  当录音按钮被按下所触发的事件，这时候是开始录音
@@ -113,6 +108,9 @@
     NSInteger index = sender.tag;
     switch (index) {
         case 0: {
+            sender.tag = 1;
+            [sender setImage:[UIImage imageNamed:@"keyboard"] forState:UIControlStateNormal];
+             [sender setImage:[UIImage imageNamed:@"keyboard_HL"] forState:UIControlStateHighlighted];
             sender.selected = !sender.selected;
             if (sender.selected) {
                 self.inputedText = self.inputTextView.text;
@@ -138,9 +136,11 @@
             break;
         }
         case 1: {
+            sender.tag =0;
             sender.selected = !sender.selected;
             self.voiceChangeButton.selected = !sender.selected;
-            
+            [sender setImage:[UIImage imageNamed:@"AttachmentIcon"] forState:UIControlStateNormal];
+            [sender setImage:[UIImage imageNamed:@"AttachmentIcon"] forState:UIControlStateHighlighted];
             if (!sender.selected) {
                 [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     self.holdDownButton.alpha = sender.selected;
@@ -449,11 +449,11 @@
     if (self.allowsSendVoice) {
         NSString *voiceHolderImageName = [[XHConfigurationHelper appearance].messageInputViewStyle objectForKey:kXHMessageInputViewVoiceHolderImageNameKey];
         if (!voiceHolderImageName) {
-            voiceHolderImageName = @"VoiceBtn_Black";
+            voiceHolderImageName = @"voice";
         }
         NSString *voiceHolderHLImageName = [[XHConfigurationHelper appearance].messageInputViewStyle objectForKey:kXHMessageInputViewVoiceHolderHLImageNameKey];
         if (!voiceHolderHLImageName) {
-            voiceHolderHLImageName = @"VoiceBtn_BlackHL";
+            voiceHolderHLImageName = @"voice_HL";
         }
         
         UIEdgeInsets edgeInsets = UIEdgeInsetsMake(9, 9, 9, 9);
@@ -464,11 +464,11 @@
         buttonFrame = CGRectMake(textViewLeftMargin-5, 0, width+10, self.frame.size.height);
         button.frame = buttonFrame;
         button.alpha = self.voiceChangeButton.selected;
-//        [button addTarget:self action:@selector(holdDownButtonTouchDown) forControlEvents:UIControlEventTouchDown];
-//        [button addTarget:self action:@selector(holdDownButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
-//        [button addTarget:self action:@selector(holdDownButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
-//        [button addTarget:self action:@selector(holdDownDragOutside) forControlEvents:UIControlEventTouchDragExit];
-//        [button addTarget:self action:@selector(holdDownDragInside) forControlEvents:UIControlEventTouchDragEnter];
+        [button addTarget:self action:@selector(holdDownButtonTouchDown) forControlEvents:UIControlEventTouchDown];
+        [button addTarget:self action:@selector(holdDownButtonTouchUpOutside) forControlEvents:UIControlEventTouchUpOutside];
+        [button addTarget:self action:@selector(holdDownButtonTouchUpInside) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(holdDownDragOutside) forControlEvents:UIControlEventTouchDragExit];
+        [button addTarget:self action:@selector(holdDownDragInside) forControlEvents:UIControlEventTouchDragEnter];
         [self addSubview:button];
         self.holdDownButton = button;
     }
