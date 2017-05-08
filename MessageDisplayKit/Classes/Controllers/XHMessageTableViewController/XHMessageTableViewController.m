@@ -9,6 +9,9 @@
 #import "XHMessageTableViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#define CALIBRIFONT(_size) (UIFont *)[UIFont fontWithName:@"Calibri" size:(CGFloat)(_size)]
+
+
 @interface XHMessageTableViewController ()
 
 /**
@@ -684,7 +687,7 @@ static CGPoint  delayOffset = {0.0};
     // Do any additional setup after loading the view.
     // 初始化消息页面布局
     [self initilzer];
-    [[XHMessageBubbleView appearance] setFont:[UIFont systemFontOfSize:16.0f]];
+    [[XHMessageBubbleView appearance] setFont:CALIBRIFONT(16.0)];
 }
 
 - (void)didReceiveMemoryWarning {

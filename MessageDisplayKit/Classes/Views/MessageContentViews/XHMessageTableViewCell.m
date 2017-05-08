@@ -430,7 +430,7 @@ static const CGFloat kXHUserNameLabelHeight = 20;
             timestampLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
             timestampLabel.badgeColor = timestampBackgroundColor;
             timestampLabel.textColor = timestampLabelTextColor;
-            timestampLabel.font = [UIFont systemFontOfSize:10.0f];
+            timestampLabel.font = CALIBRIFONT(10.0);
             timestampLabel.center = CGPointMake(CGRectGetWidth([[UIScreen mainScreen] bounds]) / 2.0, timestampLabel.center.y);
             [self.contentView addSubview:timestampLabel];
             [self.contentView bringSubviewToFront:timestampLabel];

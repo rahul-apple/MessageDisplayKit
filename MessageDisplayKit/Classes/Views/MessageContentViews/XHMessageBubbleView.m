@@ -27,6 +27,9 @@
 
 #define kXHNoneBubblePhotoMargin (kXHHaveBubbleMargin - kXHBubblePhotoMargin) // 在没有气泡的时候，也就是在图片、视频、地理位置的时候，图片内部做了Margin，所以需要减去内部的Margin
 
+#define CALIBRIFONT(_size) (UIFont *)[UIFont fontWithName:@"Calibri" size:(CGFloat)(_size)]
+
+
 @interface XHMessageBubbleView ()
 
 @property (nonatomic, weak, readwrite) SETextView *displayTextView;
@@ -172,7 +175,7 @@
         return _font;
     }
     
-    return [UIFont systemFontOfSize:16.0f];
+    return CALIBRIFONT(16.0);
 }
 
 #pragma mark - Getters
@@ -299,6 +302,7 @@
 - (void)configureMessageDisplayMediaWithMessage:(id <XHMessageModel>)message {
     switch (message.messageMediaType) {
         case XHBubbleMessageMediaTypeText:
+            _displayTextView.textColor = message.bubbleMessageType == XHBubbleMessageTypeSending ? [UIColor whiteColor] : [UIColor blackColor];
             _displayTextView.attributedText = [[XHMessageBubbleHelper sharedMessageBubbleHelper] bubbleAttributtedStringWithText:[message text]];
             break;
         case XHBubbleMessageMediaTypePhoto:
@@ -394,7 +398,7 @@
                 geolocationsLabel.lineBreakMode = NSLineBreakByTruncatingTail;
                 geolocationsLabel.textColor = [UIColor whiteColor];
                 geolocationsLabel.backgroundColor = [UIColor clearColor];
-                geolocationsLabel.font = [UIFont systemFontOfSize:12];
+                geolocationsLabel.font = CALIBRIFONT(13.0);
                 [bubblePhotoImageView addSubview:geolocationsLabel];
                 _geolocationsLabel = geolocationsLabel;
             }
@@ -405,7 +409,7 @@
             UILabel *voiceDurationLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 28, 20)];
             voiceDurationLabel.textColor = [UIColor colorWithWhite:0.579 alpha:1.000];
             voiceDurationLabel.backgroundColor = [UIColor clearColor];
-            voiceDurationLabel.font = [UIFont systemFontOfSize:13.f];
+            voiceDurationLabel.font = CALIBRIFONT(13.0);
             voiceDurationLabel.textAlignment = NSTextAlignmentCenter;
             voiceDurationLabel.hidden = YES;
             [self addSubview:voiceDurationLabel];
