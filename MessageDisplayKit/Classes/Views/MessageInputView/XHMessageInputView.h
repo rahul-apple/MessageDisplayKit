@@ -35,6 +35,15 @@ typedef NS_ENUM(NSInteger, XHMessageInputViewStyle) {
 
 @optional
 
+/*  @param messageInputTextView 输入框对象
+*/
+
+- (void)inputTextViewDidEndEditing:(XHMessageTextView *)messageInputTextView;
+
+
+- (void)inputTextViewShouldChangeText:(NSString *)text;
+
+
 /**
  *  在发送文本和语音之间发送改变时，会触发这个回调函数
  *
@@ -136,6 +145,10 @@ typedef NS_ENUM(NSInteger, XHMessageInputViewStyle) {
  *  语音录制按钮
  */
 @property (nonatomic, weak, readonly) UIButton *holdDownButton;
+
+
+@property (nonatomic, assign, readwrite) BOOL isBeginEditing;
+
 
 #pragma mark - Message input view
 

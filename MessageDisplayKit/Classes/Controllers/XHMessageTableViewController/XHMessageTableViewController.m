@@ -1031,6 +1031,7 @@ static CGPoint  delayOffset = {0.0};
     if ([self.delegate respondsToSelector:@selector(didSendText:fromSender:onDate:)]) {
         [self.delegate didSendText:text fromSender:self.messageSender onDate:[NSDate date]];
     }
+    self.messageInputView.isBeginEditing = YES;
 }
 
 - (void)didSelectedMultipleMediaAction {

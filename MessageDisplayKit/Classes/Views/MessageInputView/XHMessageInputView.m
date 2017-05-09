@@ -30,6 +30,8 @@
  */
 @property (nonatomic, assign, readwrite) BOOL isCancelled;
 
+
+
 /**
  *  是否正在錄音
  */
@@ -576,6 +578,7 @@
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
+    _isBeginEditing = YES;
     [textView becomeFirstResponder];
     if ([self.delegate respondsToSelector:@selector(inputTextViewDidBeginEditing:)]) {
         [self.delegate inputTextViewDidBeginEditing:self.inputTextView];
@@ -584,11 +587,21 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
     [textView resignFirstResponder];
+    if ([self.delegate respondsToSelector:@selector(inputTextViewDidEndEditing:)]) {
+        [self.delegate inputTextViewDidEndEditing:self.inputTextView];
+    }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSString *string = [textView.text stringByReplacingCharactersInRange:range withString:text];
-    NSString *trimmedString = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    if (_isBeginEditing) {
+        _isBeginEditing = NO;
+        if ([self.delegate respondsToSelector:@selector(inputTextViewShouldChangeText:)]) {
+            [self.delegate inputTextViewShouldChangeText:string];
+        }
+    }
+    
+    NSString *trimmedString = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     self.multiMediaSendButton.enabled = ![trimmedString isEqualToString:@""];
     return YES;
 }
