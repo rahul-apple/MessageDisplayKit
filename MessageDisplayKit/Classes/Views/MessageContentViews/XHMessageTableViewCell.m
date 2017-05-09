@@ -207,7 +207,7 @@ static const CGFloat kXHUserNameLabelHeight = 20;
 - (UIImage *)getAvatarPlaceholderImage {
     NSString *avatarPalceholderImageName = [[XHConfigurationHelper appearance].messageTableStyle objectForKey:kXHMessageTableAvatarPalceholderImageNameKey];
     if (!avatarPalceholderImageName) {
-        avatarPalceholderImageName = @"avatar";
+        avatarPalceholderImageName = @"person";
     }
     return [UIImage imageNamed:avatarPalceholderImageName];
 }
