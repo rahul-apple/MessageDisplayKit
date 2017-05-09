@@ -194,10 +194,10 @@ static const CGFloat kXHUserNameLabelHeight = 20;
     if (avatarPhoto) {
         [self configAvatarWithPhoto:avatarPhoto];
         if (avatarURL) {
-            [self configAvatarWithPhotoURLString:avatarURL];
+            [self configAvatarWithPhotoURLString:message];
         }
     } else if (avatarURL) {
-        [self configAvatarWithPhotoURLString:avatarURL];
+        [self configAvatarWithPhotoURLString:message];
     } else {
         UIImage *avatarPhoto = [self getAvatarPlaceholderImage];
         [self configAvatarWithPhoto:avatarPhoto];
@@ -216,12 +216,14 @@ static const CGFloat kXHUserNameLabelHeight = 20;
     [self.avatarButton setImage:photo forState:UIControlStateNormal];
 }
 
-- (void)configAvatarWithPhotoURLString:(NSString *)photoURLString {
+- (void)configAvatarWithPhotoURLString:(id <XHMessageModel>)message {
     BOOL customLoadAvatarNetworkImage = [[[XHConfigurationHelper appearance].messageTableStyle objectForKey:kXHMessageTableCustomLoadAvatarNetworImageKey] boolValue];
     if (!customLoadAvatarNetworkImage) {
         XHMessageAvatarType avatarType = [[[XHConfigurationHelper appearance].messageTableStyle objectForKey:kXHMessageTableAvatarTypeKey] integerValue];
         self.avatarButton.messageAvatarType = avatarType;
-        [self.avatarButton setImageWithURL:[NSURL URLWithString:photoURLString] placeholer:[self getAvatarPlaceholderImage]];
+        [self.avatarButton setImageWithURL:[NSURL URLWithString:message.avatarUrl] placeholer:[self getAvatarPlaceholderImage] showActivityIndicatorView:NO completionBlock:^(UIImage *image, NSURL *url, NSError *error) {
+            [(XHMessage *)message setAvatar:image];
+        }];
         self.avatarButton.clipsToBounds = YES;
     }
 }

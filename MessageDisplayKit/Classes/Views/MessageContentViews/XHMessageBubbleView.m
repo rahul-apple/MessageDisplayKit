@@ -167,14 +167,6 @@
 #pragma mark - UIAppearance Getters
 
 - (UIFont *)font {
-    if (_font == nil) {
-        _font = [[[self class] appearance] font];
-    }
-    
-    if (_font != nil) {
-        return _font;
-    }
-    
     return CALIBRIFONT(16.0);
 }
 
@@ -373,7 +365,7 @@
             displayTextView.backgroundColor = [UIColor clearColor];
             displayTextView.selectable = NO;
             displayTextView.lineSpacing = kXHTextLineSpacing;
-            displayTextView.font = [[XHMessageBubbleView appearance] font];
+            displayTextView.font = CALIBRIFONT(16.0);
             displayTextView.showsEditingMenuAutomatically = NO;
             displayTextView.highlighted = NO;
             [self addSubview:displayTextView];
