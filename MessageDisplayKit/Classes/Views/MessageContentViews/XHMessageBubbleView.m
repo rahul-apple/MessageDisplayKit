@@ -60,7 +60,7 @@
 
 // 获取文本的实际大小
 + (CGFloat)neededWidthForText:(NSString *)text {
-    UIFont *systemFont = [[XHMessageBubbleView appearance] font];
+    UIFont *systemFont = CALIBRIFONT(16.0);
     CGSize textSize = CGSizeMake(CGFLOAT_MAX, 20); // rough accessory size
     CGSize sizeWithFont = [text sizeWithFont:systemFont constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
     
@@ -86,7 +86,7 @@
     CGSize textSize = [SETextView frameRectWithAttributtedString:[[XHMessageBubbleHelper sharedMessageBubbleHelper] bubbleAttributtedStringWithText:text]
                                                   constraintSize:CGSizeMake(maxWidth, MAXFLOAT)
                                                      lineSpacing:kXHTextLineSpacing
-                                                            font:[[XHMessageBubbleView appearance] font]].size;
+                                                            font:CALIBRIFONT(16.0)].size;
     return CGSizeMake((dyWidth > textSize.width ? textSize.width : dyWidth), textSize.height);
 }
 
