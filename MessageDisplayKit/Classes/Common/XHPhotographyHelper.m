@@ -8,8 +8,7 @@
 
 #import "XHPhotographyHelper.h"
 #import "XHMacro.h"
-
-
+#import <MobileCoreServices/UTCoreTypes.h>
 @interface XHPhotographyHelper () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, copy) DidFinishTakeMediaCompledBlock didFinishTakeMediaCompled;
@@ -39,6 +38,9 @@
     imagePickerController.editing = YES;
     imagePickerController.delegate = self;
     imagePickerController.sourceType = sourceType;
+    if (sourceType == UIImagePickerControllerSourceTypeSavedPhotosAlbum) {
+        imagePickerController.mediaTypes=[[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie,nil];
+    }
     [viewController presentViewController:imagePickerController animated:YES completion:NULL];
 }
 
