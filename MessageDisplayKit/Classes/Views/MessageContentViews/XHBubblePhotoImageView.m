@@ -44,11 +44,13 @@
     [self setNeedsDisplay];
 }
 
-- (void)configureMessagePhoto:(UIImage *)messagePhoto thumbnailUrl:(NSString *)thumbnailUrl originPhotoUrl:(NSString *)originPhotoUrl onBubbleMessageType:(XHBubbleMessageType)bubbleMessageType {
+- (void)configureMessagePhoto:(UIImage *)messagePhoto localPath:(NSString *)filePath thumbnailUrl:(NSString *)thumbnailUrl originPhotoUrl:(NSString *)originPhotoUrl onBubbleMessageType:(XHBubbleMessageType)bubbleMessageType {
     self.bubbleMessageType = bubbleMessageType;
     self.messagePhoto = messagePhoto;
     
-    if (thumbnailUrl) {
+    if (filePath) {
+        self.messagePhoto = [UIImage imageWithContentsOfFile:filePath];
+    } else if (thumbnailUrl) {
         WEAKSELF
         [self addSubview:self.activityIndicatorView];
         [self.activityIndicatorView startAnimating];
