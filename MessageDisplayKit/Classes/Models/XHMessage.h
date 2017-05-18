@@ -17,6 +17,9 @@
 @property (nonatomic, strong) UIImage *photo;
 @property (nonatomic, copy) NSString *thumbnailUrl;
 @property (nonatomic, copy) NSString *originPhotoUrl;
+@property (nonatomic, copy) NSString *photoPath;
+@property (nonatomic, copy) NSString *thumbnailPath;
+
 
 @property (nonatomic, strong) UIImage *videoConverPhoto;
 @property (nonatomic, copy) NSString *videoPath;
