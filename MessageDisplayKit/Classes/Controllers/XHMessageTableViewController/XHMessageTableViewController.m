@@ -1134,6 +1134,10 @@ static CGPoint  delayOffset = {0.0};
             }];
             break;
         }
+        case 3:{
+            [self.photographyHelper showOnPickerViewControllerSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum onViewController:self compled:PickerMediaBlock];
+            break;
+        }
         case 4:{
             break;
         }
