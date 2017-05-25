@@ -6,6 +6,26 @@
 //  Copyright (c) 2014年 嗨，我是曾宪华(@xhzengAIB)，曾加入YY Inc.担任高级移动开发工程师，拍立秀App联合创始人，热衷于简洁、而富有理性的事物 QQ:543413507 主页:http://zengxianhua.com All rights reserved.
 //
 
+@interface ImageCache : NSCache
+
++ (ImageCache *) sharedInstance;
+
+@end
+
+@implementation ImageCache
+
++ (ImageCache *) sharedInstance {
+    static ImageCache *sharedManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[NSCache alloc] init];
+        sharedManager.countLimit = 50;
+    });
+    return sharedManager;
+}
+
+@end
+
 #import "XHBubblePhotoImageView.h"
 
 #import "UIView+XHRemoteImage.h"
@@ -41,14 +61,26 @@
 
 - (void)setMessagePhoto:(UIImage *)messagePhoto {
     _messagePhoto = messagePhoto;
+
     [self setNeedsDisplay];
+
 }
 
-- (void)configureMessagePhoto:(UIImage *)messagePhoto thumbnailUrl:(NSString *)thumbnailUrl originPhotoUrl:(NSString *)originPhotoUrl onBubbleMessageType:(XHBubbleMessageType)bubbleMessageType {
+- (void)configureMessagePhoto:(UIImage *)messagePhoto localPath:(NSString *)filePath thumbnailUrl:(NSString *)thumbnailUrl originPhotoUrl:(NSString *)originPhotoUrl onBubbleMessageType:(XHBubbleMessageType)bubbleMessageType {
     self.bubbleMessageType = bubbleMessageType;
     self.messagePhoto = messagePhoto;
-    
-    if (thumbnailUrl) {
+    if ([[ImageCache sharedInstance] objectForKey:filePath]) {
+        self.messagePhoto = [[ImageCache sharedInstance] objectForKey:filePath];
+    } else if (filePath) {
+        WEAKSELF
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            UIImage * image = [UIImage imageWithContentsOfFile:filePath];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.messagePhoto = image;
+                [[ImageCache sharedInstance] setObject:image forKey:filePath];
+            });
+        });
+    } else if (thumbnailUrl) {
         WEAKSELF
         [self addSubview:self.activityIndicatorView];
         [self.activityIndicatorView startAnimating];
@@ -60,7 +92,7 @@
         self.messagePhoto = [UIImage imageNamed:placeholderImageName];
         [self setImageWithURL:[NSURL URLWithString:thumbnailUrl] placeholer:nil showActivityIndicatorView:NO completionBlock:^(UIImage *image, NSURL *url, NSError *error) {
             if ([url.absoluteString isEqualToString:thumbnailUrl]) {
-
+                
                 if (CGRectEqualToRect(weakSelf.bounds, CGRectZero)) {
                     if (weakSelf) {
                         weakSelf.semaphore = dispatch_semaphore_create(0);
@@ -78,12 +110,19 @@
                         if (image) {
                             // show image
                             weakSelf.messagePhoto = image;
+                            [[ImageCache sharedInstance] setObject:image forKey:filePath];
                             [weakSelf.activityIndicatorView stopAnimating];
                         }
                     });
                 }
             }
         }];
+    } else {
+        NSString *placeholderImageName = [[XHConfigurationHelper appearance].messageInputViewStyle objectForKey:kXHMessageTablePlaceholderImageNameKey];
+        if (!placeholderImageName) {
+            placeholderImageName = @"placeholderImage";
+        }
+        self.messagePhoto = [UIImage imageNamed:placeholderImageName];
     }
 }
 
@@ -101,12 +140,14 @@
         // Initialization code
         self.backgroundColor = [UIColor clearColor];
         self.userInteractionEnabled = YES;
+        
     }
     return self;
 }
 
 - (void)dealloc {
     _messagePhoto = nil;
+    [[ImageCache sharedInstance] removeAllObjects];
     [self.activityIndicatorView stopAnimating];
     self.activityIndicatorView = nil;
 }

@@ -37,7 +37,7 @@
  *  @param originPhotoUrl    目标图片原图的URL链接
  *  @param bubbleMessageType 目标消息类型
  */
-- (void)configureMessagePhoto:(UIImage *)messagePhoto thumbnailUrl:(NSString *)thumbnailUrl originPhotoUrl:(NSString *)originPhotoUrl onBubbleMessageType:(XHBubbleMessageType)bubbleMessageType;
+- (void)configureMessagePhoto:(UIImage *)messagePhoto localPath:(NSString *)filePath thumbnailUrl:(NSString *)thumbnailUrl originPhotoUrl:(NSString *)originPhotoUrl onBubbleMessageType:(XHBubbleMessageType)bubbleMessageType;
 
 /**
  *  获取消息类型比如发送或接收

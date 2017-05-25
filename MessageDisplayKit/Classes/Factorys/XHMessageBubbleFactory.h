@@ -26,6 +26,14 @@ typedef NS_ENUM(NSInteger, XHBubbleMessageMediaType) {
     XHBubbleMessageMediaTypeLocalPosition = 5,
 };
 
+typedef NS_ENUM(NSInteger, XHBubbleMessageStatus) {
+    XHBubbleMessageStatusSending = 0,
+    XHBubbleMessageStatusSent = 1,
+    XHBubbleMessageStatusDelivered = 2,
+    XHBubbleMessageStatusSeen = 3,
+    XHBubbleMessageStatusFailed = 4,
+};
+
 typedef NS_ENUM(NSInteger, XHBubbleMessageMenuSelecteType) {
     XHBubbleMessageMenuSelecteTypeTextCopy = 0,
     XHBubbleMessageMenuSelecteTypeTextTranspond = 1,
