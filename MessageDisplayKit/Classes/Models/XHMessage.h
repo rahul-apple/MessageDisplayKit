@@ -161,7 +161,7 @@
  *
  *  @return 返回Message model 对象
  */
-- (instancetype)initWithLocalPositionPhoto:(UIImage *)localPositionPhoto
+- (instancetype)initWithLocalPositionPhoto:(NSString *)localPositionPhoto
                               geolocations:(NSString *)geolocations
                                   location:(CLLocation *)location
                           sender:(NSString *)sender
