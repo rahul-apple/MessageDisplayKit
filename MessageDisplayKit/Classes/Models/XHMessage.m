@@ -153,7 +153,7 @@
     return self;
 }
 
-- (instancetype)initWithLocalPositionPhoto:(UIImage *)localPositionPhoto
+- (instancetype)initWithLocalPositionPhoto:(NSString *)localPositionPhoto
                               geolocations:(NSString *)geolocations
                                   location:(CLLocation *)location
                                     sender:(NSString *)sender
@@ -172,12 +172,31 @@
     return self;
 }
 
+- (instancetype)initWithContact:(NSDictionary <NSString *, id> *)contact
+                         sender:(NSString *)sender
+                      timestamp:(NSDate *)timestamp{
+    self = [super init];
+    if (self) {
+        self.contact = contact;
+        
+        self.sender = sender;
+        self.timestamp = timestamp;
+        
+        self.messageMediaType = XHBubbleMessageMediaTypeContact;
+    }
+    return self;
+}
+
 - (void)dealloc {
     _text = nil;
     
     _photo = nil;
     _thumbnailUrl = nil;
     _originPhotoUrl = nil;
+    _photoPath = nil;
+    _thumbnailPath = nil;
+    
+    _contact = nil;
     
     _videoConverPhoto = nil;
     _videoPath = nil;
@@ -211,7 +230,11 @@
         _photo = [aDecoder decodeObjectForKey:@"photo"];
         _thumbnailUrl = [aDecoder decodeObjectForKey:@"thumbnailUrl"];
         _originPhotoUrl = [aDecoder decodeObjectForKey:@"originPhotoUrl"];
-        
+        _photoPath = [aDecoder decodeObjectForKey:@"photoPath"];
+        _thumbnailPath = [aDecoder decodeObjectForKey:@"thumbnailPath"];
+
+        _contact = [aDecoder decodeObjectForKey:@"contact"];
+
         _videoConverPhoto = [aDecoder decodeObjectForKey:@"videoConverPhoto"];
         _videoPath = [aDecoder decodeObjectForKey:@"videoPath"];
         _videoUrl = [aDecoder decodeObjectForKey:@"videoUrl"];
@@ -245,7 +268,12 @@
     [aCoder encodeObject:self.photo forKey:@"photo"];
     [aCoder encodeObject:self.thumbnailUrl forKey:@"thumbnailUrl"];
     [aCoder encodeObject:self.originPhotoUrl forKey:@"originPhotoUrl"];
+    [aCoder encodeObject:self.photoPath forKey:@"photoPath"];
+    [aCoder encodeObject:self.thumbnailPath forKey:@"thumbnailPath"];
     
+    [aCoder encodeObject:self.contact forKey:@"contact"];
+
+
     [aCoder encodeObject:self.videoConverPhoto forKey:@"videoConverPhoto"];
     [aCoder encodeObject:self.videoPath forKey:@"videoPath"];
     [aCoder encodeObject:self.videoUrl forKey:@"videoUrl"];
@@ -308,6 +336,10 @@
                                                                         location:[self.location copy]
                                                                           sender:[self.sender copy]
                                                                             timestamp:[self.timestamp copy]];
+        case XHBubbleMessageMediaTypeContact:
+            return [[[self class] allocWithZone:zone] initWithContact:[self.contact copy]
+                                                                 sender:[self.sender copy]
+                                                              timestamp:[self.timestamp copy]];
         default:
             return nil;
     }

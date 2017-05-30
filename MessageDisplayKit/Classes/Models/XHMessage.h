@@ -20,6 +20,7 @@
 @property (nonatomic, copy) NSString *photoPath;
 @property (nonatomic, copy) NSString *thumbnailPath;
 
+@property (nonatomic, copy) NSDictionary <NSString *, id> *contact;
 
 @property (nonatomic, strong) UIImage *videoConverPhoto;
 @property (nonatomic, copy) NSString *videoPath;
@@ -31,7 +32,7 @@
 
 @property (nonatomic, copy) NSString *emotionPath;
 
-@property (nonatomic, strong) UIImage *localPositionPhoto;
+@property (nonatomic, copy) NSString *localPositionPhoto;
 @property (nonatomic, copy) NSString *geolocations;
 @property (nonatomic, strong) CLLocation *location;
 
@@ -165,5 +166,10 @@
                                   location:(CLLocation *)location
                           sender:(NSString *)sender
                             timestamp:(NSDate *)timestamp;
+
+
+- (instancetype)initWithContact:(NSDictionary <NSString *, id> *)contact
+                         sender:(NSString *)sender
+                      timestamp:(NSDate *)timestamp;
 
 @end
