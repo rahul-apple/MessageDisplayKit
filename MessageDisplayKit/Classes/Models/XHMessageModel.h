@@ -29,7 +29,7 @@
 - (NSString *)voiceUrl;
 - (NSString *)voiceDuration;
 
-- (UIImage *)localPositionPhoto;
+- (NSString *)localPositionPhoto;
 - (NSString *)geolocations;
 - (CLLocation *)location;
 
