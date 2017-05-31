@@ -167,7 +167,7 @@
         self.sender = sender;
         self.timestamp = timestamp;
         
-        self.messageMediaType = XHBubbleMessageMediaTypeLocalPosition;
+        self.messageMediaType = XHBubbleMessageMediaTypeLocation;
     }
     return self;
 }
@@ -330,7 +330,7 @@
             return [[[self class] allocWithZone:zone] initWithEmotionPath:[self.emotionPath copy]
                                                                 sender:[self.sender copy]
                                                                   timestamp:[self.timestamp copy]];
-        case XHBubbleMessageMediaTypeLocalPosition:
+        case XHBubbleMessageMediaTypeLocation:
             return [[[self class] allocWithZone:zone] initWithLocalPositionPhoto:[self.localPositionPhoto copy]
                                                                     geolocations:self.geolocations
                                                                         location:[self.location copy]

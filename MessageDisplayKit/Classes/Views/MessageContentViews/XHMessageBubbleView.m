@@ -152,7 +152,7 @@
             bubbleSize = CGSizeMake(needPhotoSize.width, needPhotoSize.height + kXHHaveBubblePhotoMargin * 2);
             break;
         }
-        case XHBubbleMessageMediaTypeLocalPosition: {
+        case XHBubbleMessageMediaTypeLocation: {
             // 固定大小，必须的
             CGSize localPostionSize = [XHMessageBubbleView neededSizeForLocalPostion];
             bubbleSize = CGSizeMake(localPostionSize.width, localPostionSize.height + kXHHaveBubblePhotoMargin * 2);
@@ -194,7 +194,7 @@
             topSumForBottom = kXHHaveBubbleVoiceMargin * 2;
             break;
         case XHBubbleMessageMediaTypePhoto:
-        case XHBubbleMessageMediaTypeLocalPosition:
+        case XHBubbleMessageMediaTypeLocation:
             marginY = kXHHaveBubblePhotoMargin;
             topSumForBottom = kXHHaveBubblePhotoMargin * 2;
             break;
@@ -271,13 +271,13 @@
         }
         case XHBubbleMessageMediaTypePhoto:
         case XHBubbleMessageMediaTypeVideo:
-        case XHBubbleMessageMediaTypeLocalPosition: {
+        case XHBubbleMessageMediaTypeLocation: {
             // 只要是图片和视频消息，必须把尖嘴显示控件显示出来
             _bubblePhotoImageView.hidden = NO;
             
             _videoPlayImageView.hidden = (currentType != XHBubbleMessageMediaTypeVideo);
             
-            _geolocationsLabel.hidden = (currentType != XHBubbleMessageMediaTypeLocalPosition);
+            _geolocationsLabel.hidden = (currentType != XHBubbleMessageMediaTypeLocation);
             
             // 那其他的控件都必须隐藏
             _displayTextView.hidden = YES;
@@ -314,7 +314,7 @@
                 _emotionImageView.animatedImage = animatedImage;
             }
             break;
-        case XHBubbleMessageMediaTypeLocalPosition:
+        case XHBubbleMessageMediaTypeLocation:
             [_bubblePhotoImageView configureMessagePhoto:message.localPositionPhoto localPath:nil thumbnailUrl:nil originPhotoUrl:nil onBubbleMessageType:self.message.bubbleMessageType];
             
             _geolocationsLabel.text = message.geolocations;
@@ -505,7 +505,7 @@
         }
         case XHBubbleMessageMediaTypePhoto:
         case XHBubbleMessageMediaTypeVideo:
-        case XHBubbleMessageMediaTypeLocalPosition: {
+        case XHBubbleMessageMediaTypeLocation: {
             CGSize needPhotoSize = [XHMessageBubbleView neededSizeForPhoto:self.message.photo];
             CGFloat paddingX = 0.0f;
             if (self.message.bubbleMessageType == XHBubbleMessageTypeSending) {
@@ -513,7 +513,7 @@
             }
             
             CGFloat marginY = kXHNoneBubblePhotoMargin;
-            if (currentType == XHBubbleMessageMediaTypePhoto || currentType == XHBubbleMessageMediaTypeLocalPosition) {
+            if (currentType == XHBubbleMessageMediaTypePhoto || currentType == XHBubbleMessageMediaTypeLocation) {
                 marginY = kXHHaveBubblePhotoMargin;
             }
             

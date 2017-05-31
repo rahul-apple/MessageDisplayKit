@@ -435,7 +435,7 @@ static CGPoint  delayOffset = {0.0};
         case XHBubbleMessageMediaTypeEmotion: {
             break;
         }
-        case XHBubbleMessageMediaTypeLocalPosition: {
+        case XHBubbleMessageMediaTypeLocation: {
             break;
         }
         default:

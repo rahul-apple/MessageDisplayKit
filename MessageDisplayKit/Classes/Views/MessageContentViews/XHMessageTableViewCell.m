@@ -243,7 +243,7 @@ static const CGFloat kXHUserNameLabelHeight = 20;
     switch (currentMediaType) {
         case XHBubbleMessageMediaTypePhoto:
         case XHBubbleMessageMediaTypeVideo:
-        case XHBubbleMessageMediaTypeLocalPosition: {
+        case XHBubbleMessageMediaTypeLocation: {
             UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sigleTapGestureRecognizerHandle:)];
             [self.messageBubbleView.bubblePhotoImageView addGestureRecognizer:tapGestureRecognizer];
             break;
