@@ -44,6 +44,7 @@
 
 @optional
 
+- (NSString *)thumbnailPath;
 - (BOOL)shouldShowUserName;
 
 - (NSString *)sender;

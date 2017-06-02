@@ -278,7 +278,7 @@
             _videoPlayImageView.hidden = (currentType != XHBubbleMessageMediaTypeVideo);
             
             _geolocationsLabel.hidden = (currentType != XHBubbleMessageMediaTypeLocation);
-            
+            [_geolocationsLabel setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:0.4f]];
             // 那其他的控件都必须隐藏
             _displayTextView.hidden = YES;
             _bubbleImageView.hidden = YES;
@@ -315,7 +315,11 @@
             }
             break;
         case XHBubbleMessageMediaTypeLocation:
-            [_bubblePhotoImageView configureMessagePhoto:message.localPositionPhoto localPath:nil thumbnailUrl:nil originPhotoUrl:nil onBubbleMessageType:self.message.bubbleMessageType];
+            if ([[NSFileManager defaultManager]fileExistsAtPath:message.thumbnailPath]) {
+                [_bubblePhotoImageView configureMessagePhoto:nil localPath:message.thumbnailPath thumbnailUrl:nil originPhotoUrl:message.localPositionPhoto onBubbleMessageType:self.message.bubbleMessageType];
+            }else{
+                [_bubblePhotoImageView configureMessagePhoto:nil localPath:nil thumbnailUrl:message.localPositionPhoto originPhotoUrl:message.localPositionPhoto onBubbleMessageType:self.message.bubbleMessageType];
+            }
             
             _geolocationsLabel.text = message.geolocations;
             break;
