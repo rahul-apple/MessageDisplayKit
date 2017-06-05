@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		7053E7151B42EE6C00DE808D /* keyboard_HL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7053E7131B42EE6C00DE808D /* keyboard_HL@2x.png */; };
 		7053E7161B42EE6C00DE808D /* keyboard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7053E7141B42EE6C00DE808D /* keyboard@2x.png */; };
+		BE5797B21EE539A9008AD5E0 /* XHContactTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = BE5797AF1EE539A9008AD5E0 /* XHContactTableViewCell.h */; };
+		BE5797B31EE539A9008AD5E0 /* XHContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5797B01EE539A9008AD5E0 /* XHContactTableViewCell.m */; };
+		BE5797B41EE539A9008AD5E0 /* XHContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE5797B11EE539A9008AD5E0 /* XHContactTableViewCell.xib */; };
 		E466FA4E1B42EC0F00EE02A6 /* XHConfigurationHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = E466FA4C1B42EC0F00EE02A6 /* XHConfigurationHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E466FA4F1B42EC0F00EE02A6 /* XHConfigurationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E466FA4D1B42EC0F00EE02A6 /* XHConfigurationHelper.m */; };
 		F751C1F11A4C3E1B00743ECB /* MessageDisplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F751C1E51A4C3E1B00743ECB /* MessageDisplayKit.framework */; };
@@ -207,6 +210,9 @@
 /* Begin PBXFileReference section */
 		7053E7131B42EE6C00DE808D /* keyboard_HL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard_HL@2x.png"; sourceTree = "<group>"; };
 		7053E7141B42EE6C00DE808D /* keyboard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keyboard@2x.png"; sourceTree = "<group>"; };
+		BE5797AF1EE539A9008AD5E0 /* XHContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHContactTableViewCell.h; sourceTree = "<group>"; };
+		BE5797B01EE539A9008AD5E0 /* XHContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHContactTableViewCell.m; sourceTree = "<group>"; };
+		BE5797B11EE539A9008AD5E0 /* XHContactTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHContactTableViewCell.xib; sourceTree = "<group>"; };
 		E466FA4C1B42EC0F00EE02A6 /* XHConfigurationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHConfigurationHelper.h; sourceTree = "<group>"; };
 		E466FA4D1B42EC0F00EE02A6 /* XHConfigurationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHConfigurationHelper.m; sourceTree = "<group>"; };
 		F751C1E51A4C3E1B00743ECB /* MessageDisplayKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MessageDisplayKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -775,6 +781,9 @@
 				F751C3501A4C3EDB00743ECB /* MessageContentViews */,
 				F751C3591A4C3EDB00743ECB /* MessageInputView */,
 				F751C3601A4C3EDB00743ECB /* MessageMenuViews */,
+				BE5797AF1EE539A9008AD5E0 /* XHContactTableViewCell.h */,
+				BE5797B01EE539A9008AD5E0 /* XHContactTableViewCell.m */,
+				BE5797B11EE539A9008AD5E0 /* XHContactTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -976,6 +985,7 @@
 				F751C4901A4C3EDB00743ECB /* SELineLayout.h in Headers */,
 				F751C45F1A4C3EDB00743ECB /* XHUIKitMacro.h in Headers */,
 				F751C4E01A4C3EDB00743ECB /* XHVoiceRecordHUD.h in Headers */,
+				BE5797B21EE539A9008AD5E0 /* XHContactTableViewCell.h in Headers */,
 				E466FA4E1B42EC0F00EE02A6 /* XHConfigurationHelper.h in Headers */,
 				F7D253471A4D32B30015764B /* LKBadgeView.h in Headers */,
 				F751C4921A4C3EDB00743ECB /* SELinkText.h in Headers */,
@@ -1072,6 +1082,7 @@
 				F7B9E9241A4D602C0072F81B /* SenderVoiceNodePlaying001@2x.png in Resources */,
 				F7B9E8F31A4D602C0072F81B /* input-bar-flat.png in Resources */,
 				F7B9E9341A4D602C0072F81B /* VoiceBtn_Black@2x.png in Resources */,
+				BE5797B41EE539A9008AD5E0 /* XHContactTableViewCell.xib in Resources */,
 				F7B9E8FC1A4D602C0072F81B /* msg_chat_voice_unread@2x.png in Resources */,
 				F7B9E9231A4D602C0072F81B /* SenderVoiceNodePlaying000@2x.png in Resources */,
 				F7B9E90B1A4D602C0072F81B /* RecordingSignal003@2x.png in Resources */,
@@ -1143,6 +1154,7 @@
 				F751C45A1A4C3EDB00743ECB /* XHMessageVoiceFactory.m in Sources */,
 				F751C4DF1A4C3EDB00743ECB /* XHMessageTextView.m in Sources */,
 				F751C4971A4C3EDB00743ECB /* SETextAttachment.m in Sources */,
+				BE5797B31EE539A9008AD5E0 /* XHContactTableViewCell.m in Sources */,
 				F751C4E31A4C3EDB00743ECB /* XHEmotionCollectionViewCell.m in Sources */,
 				F751C44C1A4C3EDB00743ECB /* XHCacheManager.m in Sources */,
 				F751C4501A4C3EDB00743ECB /* XHHTTPClient.m in Sources */,
