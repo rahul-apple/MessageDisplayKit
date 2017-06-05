@@ -1226,9 +1226,6 @@ static CGPoint  delayOffset = {0.0};
     
     id <XHMessageModel> message = [self.dataSource messageForRowAtIndexPath:indexPath];
     
-    if (message.messageMediaType == XHBubbleMessageMediaTypeContact) {
-        return [self configureContactCellWithMessage:message tableView:tableView cellForRowatIndexpath:indexPath];
-    }
     // 如果需要定制复杂的业务UI，那么就实现该DataSource方法
     if ([self.dataSource respondsToSelector:@selector(tableView:cellForRowAtIndexPath:targetMessage:)]) {
         UITableViewCell *tableViewCell = [self.dataSource tableView:tableView cellForRowAtIndexPath:indexPath targetMessage:message];
@@ -1260,27 +1257,11 @@ static CGPoint  delayOffset = {0.0};
     return messageTableViewCell;
 }
 
-#pragma mark - Contact tableView Cell Configure
--(XHContactTableViewCell *)configureContactCellWithMessage:(id <XHMessageModel>)message tableView:(UITableView *)tableView cellForRowatIndexpath:(NSIndexPath *)indexPath{
-    static NSString *reuseIdentifier = @"XHContactTableViewCell";
-    XHContactTableViewCell *cell = (XHContactTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (!cell) {
-        [tableView registerNib:[UINib nibWithNibName:@"XHContactTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-        cell = (XHContactTableViewCell *)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    }
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    [cell setBackgroundColor:[UIColor clearColor]];
-    return cell;
-}
-
-
 #pragma mark - Table View Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     id <XHMessageModel> message = [self.dataSource messageForRowAtIndexPath:indexPath];
-    if (message.messageMediaType == XHBubbleMessageMediaTypeContact) {
-        return 100;
-    }
+    
     CGFloat calculateCellHeight = 0;
     
     if ([self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:targetMessage:)]) {

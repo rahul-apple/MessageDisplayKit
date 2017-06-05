@@ -514,9 +514,6 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "曾宪华 开发团队(http://iyilunba.com ) 本人QQ:543413507 本人QQ群（142557668）.";
 				TargetAttributes = {
-					74180C72190F496E00A35C82 = {
-						DevelopmentTeam = WRBW3Z36M6;
-					};
 					74180C96190F496E00A35C82 = {
 						TestTargetID = 74180C72190F496E00A35C82;
 					};
@@ -803,7 +800,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = WRBW3Z36M6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MessageDisplayKitStoryBoradExample/Vendor",
@@ -811,13 +807,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MessageDisplayKitStoryBoradExample/MessageDisplayKitStoryBoradExample-Prefix.pch";
 				INFOPLIST_FILE = "MessageDisplayKitStoryBoradExample/MessageDisplayKitStoryBoradExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.naga.messagedisplaykit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -828,7 +823,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = WRBW3Z36M6;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/MessageDisplayKitStoryBoradExample/Vendor",
@@ -836,13 +830,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MessageDisplayKitStoryBoradExample/MessageDisplayKitStoryBoradExample-Prefix.pch";
 				INFOPLIST_FILE = "MessageDisplayKitStoryBoradExample/MessageDisplayKitStoryBoradExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.naga.messagedisplaykit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

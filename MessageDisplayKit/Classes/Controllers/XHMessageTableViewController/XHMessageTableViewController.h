@@ -18,7 +18,6 @@
 #import "XHShareMenuView.h"
 #import "XHEmotionManagerView.h"
 #import "XHVoiceRecordHUD.h"
-#import "XHContactTableViewCell.h"
 
 // Factory
 #import "XHMessageBubbleFactory.h"
