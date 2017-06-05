@@ -1225,6 +1225,12 @@ static CGPoint  delayOffset = {0.0};
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     id <XHMessageModel> message = [self.dataSource messageForRowAtIndexPath:indexPath];
+    if (message.messageMediaType == XHBubbleMessageMediaTypeContact) {
+        if ([self.dataSource respondsToSelector:@selector(configureContactCellFor:cellForRowAtIndexPath:targetMessage:)]) {
+            UITableViewCell *tableViewCell = [self.dataSource configureContactCellFor:tableView cellForRowAtIndexPath:indexPath targetMessage:message];
+            return tableViewCell;
+        }
+    }
     
     // 如果需要定制复杂的业务UI，那么就实现该DataSource方法
     if ([self.dataSource respondsToSelector:@selector(tableView:cellForRowAtIndexPath:targetMessage:)]) {
@@ -1261,7 +1267,11 @@ static CGPoint  delayOffset = {0.0};
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     id <XHMessageModel> message = [self.dataSource messageForRowAtIndexPath:indexPath];
-    
+    if (message.messageMediaType == XHBubbleMessageMediaTypeContact) {
+        if ([self.dataSource respondsToSelector:@selector(configureTableView:heightForRowAtIndexPath:targetMessage:)]) {
+            return [self.dataSource configureTableView:tableView heightForRowAtIndexPath:indexPath targetMessage:message];
+        }
+    }
     CGFloat calculateCellHeight = 0;
     
     if ([self.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:targetMessage:)]) {
