@@ -1212,6 +1212,7 @@ static CGPoint  delayOffset = {0.0};
     return self.messages[indexPath.row];
 }
 
+
 #pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

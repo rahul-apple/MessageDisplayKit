@@ -146,6 +146,8 @@
 
 @required
 - (id <XHMessageModel>)messageForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)configureContactCellFor:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath targetMessage:(id<XHMessageModel>)message;
+- (CGFloat)configureTableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath targetMessage:(id<XHMessageModel>)message;
 
 @optional
 /**
@@ -160,8 +162,6 @@
  */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath targetMessage:(id<XHMessageModel>)message;
 
-- (UITableViewCell *)configureContactCellFor:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath targetMessage:(id<XHMessageModel>)message;
-- (CGFloat)configureTableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath targetMessage:(id<XHMessageModel>)message;
 @end
 
 @interface XHMessageTableViewController : UIViewController <
