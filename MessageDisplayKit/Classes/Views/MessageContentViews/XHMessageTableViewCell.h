@@ -61,22 +61,22 @@
 /**
  *  自定义多媒体消息内容View
  */
-@property (nonatomic, weak, readonly) XHMessageBubbleView *messageBubbleView;
+@property (nonatomic, weak, readonly)IBOutlet XHMessageBubbleView *messageBubbleView;
 
 /**
  *  头像按钮
  */
-@property (nonatomic, weak, readonly) UIButton *avatarButton;
+@property (nonatomic, weak, readonly)IBOutlet UIButton *avatarButton;
 
 /**
  *  用户名标签
  */
-@property (nonatomic, weak, readonly) UILabel *userNameLabel;
+@property (nonatomic, weak, readonly)IBOutlet UILabel *userNameLabel;
 
 /**
  *  时间轴Label
  */
-@property (nonatomic, weak, readonly) LKBadgeView *timestampLabel;
+@property (nonatomic, weak, readonly)IBOutlet LKBadgeView *timestampLabel;
 
 /**
  *  Cell所在的位置，用于Cell delegate回调
@@ -122,5 +122,7 @@
  */
 + (CGFloat)calculateCellHeightWithMessage:(id <XHMessageModel>)message
                         displaysTimestamp:(BOOL)displayTimestamp;
+
+- (void)configAvatarWithMessage:(id <XHMessageModel>)message;
 
 @end
