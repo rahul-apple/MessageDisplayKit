@@ -261,6 +261,11 @@ static const CGFloat kXHUserNameLabelHeight = 20;
             [self.messageBubbleView.bubbleImageView addGestureRecognizer:tapGestureRecognizer];
             break;
         }
+            case XHBubbleMessageMediaTypeContact: {
+                UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(sigleTapGestureRecognizerHandle:)];
+                [self.messageBubbleView addGestureRecognizer:tapGestureRecognizer];
+                break;
+            }
         default:
             break;
     }

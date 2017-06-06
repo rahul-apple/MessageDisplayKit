@@ -124,5 +124,6 @@
                         displaysTimestamp:(BOOL)displayTimestamp;
 
 - (void)configAvatarWithMessage:(id <XHMessageModel>)message;
+- (void)configureTimestamp:(BOOL)displayTimestamp atMessage:(id <XHMessageModel>)message;
 
 @end
