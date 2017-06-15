@@ -64,7 +64,7 @@ NSString *kXHMessageTableCustomLoadAvatarNetworImageKey = @"com.HUAJIE.MDK.XHMes
     self = [super init];
     if (self) {
         self.popMenuTitles = @[NSLocalizedStringFromTable(@"copy", @"MessageDisplayKitString", @"复制文本消息"),
-                               /*NSLocalizedStringFromTable(@"resend", @"MessageDisplayKitString", @"转发"),*/];
+                               NSLocalizedStringFromTable(@"☆", @"MessageDisplayKitString", @"转发"),NSLocalizedStringFromTable(@"ℹ", @"MessageDisplayKitString", @"转发"),];
     }
     return self;
 }

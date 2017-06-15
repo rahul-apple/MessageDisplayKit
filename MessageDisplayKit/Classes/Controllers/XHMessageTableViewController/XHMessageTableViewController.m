@@ -9,7 +9,7 @@
 #import "XHMessageTableViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface XHMessageTableViewController ()
+@interface XHMessageTableViewController () 
 
 /**
  *  判断是否用户手指滚动

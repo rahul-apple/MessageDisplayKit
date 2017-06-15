@@ -52,6 +52,8 @@
  */
 - (void)menuDidSelectedAtBubbleMessageMenuSelecteType:(XHBubbleMessageMenuSelecteType)bubbleMessageMenuSelecteType;
 
+- (void)addToFavouriteList: (id)dataObject;
+
 @end
 
 @interface XHMessageTableViewCell : XHBaseTableViewCell

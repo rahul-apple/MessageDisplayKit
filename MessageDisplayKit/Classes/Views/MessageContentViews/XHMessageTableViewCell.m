@@ -6,6 +6,8 @@
 //  Copyright (c) 2014年 嗨，我是曾宪华(@xhzengAIB)，曾加入YY Inc.担任高级移动开发工程师，拍立秀App联合创始人，热衷于简洁、而富有理性的事物 QQ:543413507 主页:http://zengxianhua.com All rights reserved.
 //
 
+
+
 #import "XHMessageTableViewCell.h"
 
 #define CALIBRIFONT(_size) (UIFont *)[UIFont fontWithName:@"Calibri" size:(CGFloat)(_size)]
@@ -118,7 +120,7 @@ static const CGFloat kXHUserNameLabelHeight = 20;
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
-    return (action == @selector(copyed:) || action == @selector(transpond:) || action == @selector(favorites:) || action == @selector(more:));
+    return (action == @selector(copyed:) || action == @selector(favorites:) || action == @selector(info:) || action == @selector(transpond:) || action == @selector(more:));
 }
 
 #pragma mark - Menu Actions
@@ -129,12 +131,18 @@ static const CGFloat kXHUserNameLabelHeight = 20;
     DLog(@"Cell was copy");
 }
 
-- (void)transpond:(id)sender {
-    DLog(@"Cell was transpond");
-}
-
 - (void)favorites:(id)sender {
     DLog(@"Cell was favorites");
+    
+    [self.delegate addToFavouriteList:self.messageBubbleView.message];
+}
+
+- (void)info:(id)sender {
+    DLog(@"Cell was info");
+}
+
+- (void)transpond:(id)sender {
+    DLog(@"Cell was transpond");
 }
 
 - (void)more:(id)sender {
@@ -306,14 +314,18 @@ static const CGFloat kXHUserNameLabelHeight = 20;
                 break;
             }
             case 1: {
-                action = @selector(transpond:);
-                break;
-            }
-            case 2: {
                 action = @selector(favorites:);
                 break;
             }
+            case 2: {
+                action = @selector(info:);
+                break;
+            }
             case 3: {
+                action = @selector(transpond:);
+                break;
+            }
+            case 4: {
                 action = @selector(more:);
                 break;
             }
