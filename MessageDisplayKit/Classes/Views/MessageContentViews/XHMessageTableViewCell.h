@@ -54,6 +54,10 @@
 
 - (void)addToFavouriteList: (id)dataObject;
 
+- (NSArray *)menuItemsForIndexPath:(NSIndexPath *)indexPath withMessage:(id)message;
+
+- (void)deleteSelectedImage: (id)dataObject;
+
 @end
 
 @interface XHMessageTableViewCell : XHBaseTableViewCell

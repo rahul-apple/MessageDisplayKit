@@ -120,7 +120,7 @@ static const CGFloat kXHUserNameLabelHeight = 20;
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
-    return (action == @selector(copyed:) || action == @selector(favorites:) || action == @selector(info:) || action == @selector(transpond:) || action == @selector(more:));
+    return (action == @selector(copyed:) || action == @selector(favorites:) || action == @selector(info:) || action == @selector(deleteMessage:) || action == @selector(forwardMessage:));
 }
 
 #pragma mark - Menu Actions
@@ -133,7 +133,6 @@ static const CGFloat kXHUserNameLabelHeight = 20;
 
 - (void)favorites:(id)sender {
     DLog(@"Cell was favorites");
-    
     [self.delegate addToFavouriteList:self.messageBubbleView.message];
 }
 
@@ -141,6 +140,14 @@ static const CGFloat kXHUserNameLabelHeight = 20;
     DLog(@"Cell was info");
 }
 
+-(void)deleteMessage:(id)sender{
+    DLog(@"Cell Delete Called");
+    [self.delegate deleteSelectedImage:self.messageBubbleView.message];
+}
+
+-(void)forwardMessage:(id)sender{
+    DLog(@"Cell Forward Called");
+}
 - (void)transpond:(id)sender {
     DLog(@"Cell was transpond");
 }
@@ -301,36 +308,31 @@ static const CGFloat kXHUserNameLabelHeight = 20;
     if (longPressGestureRecognizer.state != UIGestureRecognizerStateBegan || ![self becomeFirstResponder])
         return;
     
-    NSArray *popMenuTitles = [[XHConfigurationHelper appearance] popMenuTitles];
+    NSArray *popMenuTitles ;
+    if ([self.delegate respondsToSelector:@selector(menuItemsForIndexPath:withMessage:)]) {
+        popMenuTitles = [self.delegate menuItemsForIndexPath:self.indexPath withMessage:self.messageBubbleView.message];
+    }else{
+        popMenuTitles = [[XHConfigurationHelper appearance] popMenuTitles];
+    }
+    
     NSMutableArray *menuItems = [[NSMutableArray alloc] init];
     for (int i = 0; i < popMenuTitles.count; i ++) {
         NSString *title = popMenuTitles[i];
         SEL action = nil;
-        switch (i) {
-            case 0: {
-                if ([self.messageBubbleView.message messageMediaType] == XHBubbleMessageMediaTypeText) {
-                    action = @selector(copyed:);
-                }
-                break;
+        if ([title isEqualToString:@"copy"]) {
+            if ([self.messageBubbleView.message messageMediaType] == XHBubbleMessageMediaTypeText) {
+                action = @selector(copyed:);
             }
-            case 1: {
-                action = @selector(favorites:);
-                break;
-            }
-            case 2: {
-                action = @selector(info:);
-                break;
-            }
-            case 3: {
-                action = @selector(transpond:);
-                break;
-            }
-            case 4: {
-                action = @selector(more:);
-                break;
-            }
-            default:
-                break;
+        }else if ([title isEqualToString:@"★"]){
+            action = @selector(favorites:);
+        }else if ([title isEqualToString:@"☆"]){
+            action = @selector(favorites:);
+        }else if ([title isEqualToString:@"ⓘ"]){
+            action = @selector(info:);
+        }else if ([title isEqualToString:@"delete"]){
+            action = @selector(deleteMessage:);
+        }else if ([title isEqualToString:@"forward"]){
+            action = @selector(forwardMessage:);
         }
         if (action) {
             UIMenuItem *item = [[UIMenuItem alloc] initWithTitle:title action:action];
@@ -343,11 +345,11 @@ static const CGFloat kXHUserNameLabelHeight = 20;
     UIMenuController *menu = [UIMenuController sharedMenuController];
     [menu setMenuItems:menuItems];
     
-    CGRect targetRect = [self convertRect:[self.messageBubbleView bubbleFrame]
-                                 fromView:self.messageBubbleView];
-    
+    CGRect targetRect = [self convertRect:[self.messageBubbleView bubbleFrame] fromView:self.messageBubbleView];
+    if (targetRect.size.width>100) {
+        targetRect.size.width = 100;
+    }
     [menu setTargetRect:CGRectInset(targetRect, 0.0f, 4.0f) inView:self];
-    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(handleMenuWillShowNotification:)
@@ -581,8 +583,6 @@ static const CGFloat kXHUserNameLabelHeight = 20;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
-
 @end
