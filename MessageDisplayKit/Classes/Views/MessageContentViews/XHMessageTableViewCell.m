@@ -142,7 +142,7 @@ static const CGFloat kXHUserNameLabelHeight = 20;
 
 -(void)deleteMessage:(id)sender{
     DLog(@"Cell Delete Called");
-    [self.delegate deleteSelectedImage:self.messageBubbleView.message];
+    [self.delegate deleteSelectedImage:self.messageBubbleView.message :_indexPath];
 }
 
 -(void)forwardMessage:(id)sender{

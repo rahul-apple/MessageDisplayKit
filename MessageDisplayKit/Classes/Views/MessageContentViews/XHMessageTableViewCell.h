@@ -56,7 +56,7 @@
 
 - (NSArray *)menuItemsForIndexPath:(NSIndexPath *)indexPath withMessage:(id)message;
 
-- (void)deleteSelectedImage: (id)dataObject;
+- (void)deleteSelectedImage: (id <XHMessageModel>)dataObject:(NSIndexPath *)indexPath;
 
 @end
 
