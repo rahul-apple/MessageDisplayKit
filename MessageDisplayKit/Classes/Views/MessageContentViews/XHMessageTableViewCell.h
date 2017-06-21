@@ -57,6 +57,7 @@
 - (NSArray *)menuItemsForIndexPath:(NSIndexPath *)indexPath withMessage:(id)message;
 
 - (void)deleteSelectedMessages: (id <XHMessageModel>)dataObject:(NSIndexPath *)indexPath;
+- (void)messageInfo: (id <XHMessageModel>)dataObject: (XHMessageTableViewCell *)selectedCell;
 
 @end
 

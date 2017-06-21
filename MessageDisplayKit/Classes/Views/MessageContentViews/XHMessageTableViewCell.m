@@ -138,6 +138,7 @@ static const CGFloat kXHUserNameLabelHeight = 20;
 
 - (void)info:(id)sender {
     DLog(@"Cell was info");
+    [self.delegate messageInfo:self.messageBubbleView.message :self];
 }
 
 -(void)deleteMessage:(id)sender{
