@@ -58,6 +58,7 @@
 
 - (void)deleteSelectedMessages: (id <XHMessageModel>)dataObject:(NSIndexPath *)indexPath;
 - (void)messageInfo: (id <XHMessageModel>)dataObject: (XHMessageTableViewCell *)selectedCell;
+//- (void)messageForward: (id <XHMessageModel>)dataObject;
 
 @end
 
