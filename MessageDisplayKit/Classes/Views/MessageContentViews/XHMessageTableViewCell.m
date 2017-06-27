@@ -426,8 +426,8 @@ static const CGFloat kXHUserNameLabelHeight = 20;
     [self addGestureRecognizer:recognizer];
     
     
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerHandle:)];
-    [self addGestureRecognizer:tapGestureRecognizer];
+//    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerHandle:)];
+//    [self addGestureRecognizer:tapGestureRecognizer];
 }
 
 - (instancetype)initWithMessage:(id <XHMessageModel>)message
